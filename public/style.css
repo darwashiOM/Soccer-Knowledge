@@ -1,0 +1,131 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  max-width: 1400px;
+}
+
+.sidebar {
+  width: 20%;
+  background-color: #2c2c2c;
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.sidebar h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 10px 0;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 0 20px;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.tab {
+  flex-grow: 1;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 5px;
+  margin: 0 5px;
+}
+
+.tab.active {
+  background-color: #555;
+}
+
+.matches {
+  margin-top: 20px;
+}
+
+.match-day {
+  margin-bottom: 20px;
+}
+
+.match-day h3 {
+  font-size: 18px;
+  color: #2c2c2c;
+  margin-bottom: 10px;
+}
+
+.match {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.match .team {
+  font-size: 16px;
+  color: #2c2c2c;
+}
+
+.match .time {
+  font-size: 16px;
+  color: #666;
+}
+
+.bet-slip {
+  width: 20%;
+  background-color: #eee;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.bet-slip h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.bet-slip .bet-item {
+  margin-bottom: 10px;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: green;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
