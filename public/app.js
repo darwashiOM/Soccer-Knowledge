@@ -5,7 +5,7 @@
 //     .then((data) => {
 //       myData = data; // Log the data for debugging purposes
 //       // You can also update the DOM here based on the data
-//       console.log(myData.response.slice(0, 10));
+//       console.log(myData);
 //     })
 //     .catch((error) => console.error("Error fetching data:", error));
 // });
@@ -567,8 +567,6 @@ firstList.forEach((game) => {
     renderedData.set(date, [game]);
   }
 });
-// let date = response[0].fixture.date;
-// console.log(date.slice(0, date.indexOf("T")));
 
 function formatDate(dateString) {
   const date = new Date(dateString);
@@ -596,19 +594,17 @@ function convertUTCToLocal(dateString) {
 let renderGame = function (games) {
   let html = `<section class="match-day">
     <h3>${formatDate(games[0].fixture.date)}</h3>`;
-
+  console.log(games[0]);
   games.forEach((game) => {
     html += `<div class="match">
       <div class="team">${game.teams.home.name}</div>
+      <img class="team" src="${game.teams.home.logo}" width="50" height="50"/>
       <div class="time">${convertUTCToLocal(game.fixture.date)}</div>
+      <img class="team" src="${game.teams.away.logo}" width="50" height="50"/>
       <div class="team">${game.teams.away.name}</div>
     </div>`;
   });
   html += `</section>`;
-  console.log(html);
-  console.log(document.querySelector(".matches"));
   document.querySelector(".matches").insertAdjacentHTML("afterend", html);
 };
-// console.log([...renderedData]);
-// renderGame([...renderedData]);
 renderedData.forEach((games) => renderGame(games));

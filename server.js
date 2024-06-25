@@ -24,8 +24,7 @@ app.get("/", (req, res) => {
 
 //getting the games data from the API
 app.get("/data", async (req, res) => {
-  const url =
-    "https://api-football-v1.p.rapidapi.com/v3/fixtures?league=39&season=2023";
+  const url = `https://api-football-v1.p.rapidapi.com/v3/fixtures?league=39&season=2023&include=fixtures:limit(${resultsPerPage}|${page})`;
   const options = {
     method: "GET",
     headers: {
