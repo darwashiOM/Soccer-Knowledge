@@ -24,7 +24,9 @@ app.get("/", (req, res) => {
 
 //getting the games data from the API
 app.get("/data", async (req, res) => {
-  const url = `https://api-football-v1.p.rapidapi.com/v3/fixtures?league=39&season=2023&include=fixtures:limit(${resultsPerPage}|${page})`;
+  let matchesFrom = req.query.matchesFrom;
+  let matchesTo = req.query.matchesTo;
+  const url = `https://api-football-v1.p.rapidapi.com/v3/fixtures?league=39&season=2023`;
   const options = {
     method: "GET",
     headers: {
@@ -36,7 +38,8 @@ app.get("/data", async (req, res) => {
   try {
     const apiResponse = await fetch(url, options);
     const apiData = await apiResponse.json();
-    res.json(apiData);
+    const newValue = apiData.response.slice(matchesFrom, matchesTo);
+    res.json(newValue);
   } catch (error) {
     console.error("Failed to fetch data:", error);
     res.status(500).send("Failed to fetch data");
