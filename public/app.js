@@ -10,7 +10,7 @@
 //     .catch((error) => console.error("Error fetching data:", error));
 // });
 
-let renderedData = [];
+let renderedData = new Map();
 
 let firstList = [
   {
@@ -558,9 +558,57 @@ let firstList = [
     },
   },
 ];
-firstList.forEach((fixture) => {
-  let date = fixture.date.slice(0, 10);
+firstList.forEach((game) => {
+  let date = game.fixture.date.slice(0, 10);
+  if (renderedData.has(date)) {
+    let exitingList = renderedData.get(date);
+    exitingList.push(game);
+  } else {
+    renderedData.set(date, [game]);
+  }
 });
-console.log(firstList);
-let date = response[0].fixture.date;
-console.log(date.slice(0, date.indexOf("T")));
+// let date = response[0].fixture.date;
+// console.log(date.slice(0, date.indexOf("T")));
+
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  return date.toLocaleDateString("en-GB", options);
+}
+
+function convertUTCToLocal(dateString) {
+  const date = new Date(dateString);
+  const options = { hour: "2-digit", minute: "2-digit" };
+  return date.toLocaleTimeString([], options); // This will display only the local time without seconds
+}
+
+/*<div class="match">
+      <div class="team">${game.teams.home.name}</div>
+      <div class="time">${convertUTCToLocal(game.fixture.date)}</div>
+      <div class="team">${game.teams.away.name}</div>
+    </div>*/
+
+let renderGame = function (games) {
+  let html = `<section class="match-day">
+    <h3>${formatDate(games[0].fixture.date)}</h3>`;
+
+  games.forEach((game) => {
+    html += `<div class="match">
+      <div class="team">${game.teams.home.name}</div>
+      <div class="time">${convertUTCToLocal(game.fixture.date)}</div>
+      <div class="team">${game.teams.away.name}</div>
+    </div>`;
+  });
+  html += `</section>`;
+  console.log(html);
+  console.log(document.querySelector(".matches"));
+  document.querySelector(".matches").insertAdjacentHTML("afterend", html);
+};
+// console.log([...renderedData]);
+// renderGame([...renderedData]);
+renderedData.forEach((games) => renderGame(games));
